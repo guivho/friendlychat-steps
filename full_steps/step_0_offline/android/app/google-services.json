@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "914737973122",
+    "firebase_url": "https://my-firebase-flutter-app-9571a.firebaseio.com",
+    "project_id": "my-firebase-flutter-app-9571a",
+    "storage_bucket": "my-firebase-flutter-app-9571a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914737973122:android:b0b2d4fdfd2aa160",
+        "android_client_info": {
+          "package_name": "com.molly_corp.friendlychat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914737973122-8adu6oqfjo01216ok2n5mqha9doi6sbv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.molly_corp.friendlychat",
+            "certificate_hash": "4e1159ed3906bd8dcf33bc82d640a416f821a89a"
+          }
+        },
+        {
+          "client_id": "914737973122-tkkmicj25r1kov76lpoab0j3ls3h2a54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX4GvyET4tMUDgkySr3y_M0yDMs17YsNE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914737973122-tkkmicj25r1kov76lpoab0j3ls3h2a54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

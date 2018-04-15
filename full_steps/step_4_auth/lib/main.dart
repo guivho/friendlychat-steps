@@ -25,7 +25,7 @@ final googleSignIn = new GoogleSignIn();
 final analytics = new FirebaseAnalytics();
 final auth = FirebaseAuth.instance;
 
-const String _name = "Your Name";
+// const String _name = "Your Name";
 
 void main() {
   runApp(new FriendlychatApp());
@@ -33,15 +33,14 @@ void main() {
 
 Future<Null> _ensureLoggedIn() async {
   GoogleSignInAccount user = googleSignIn.currentUser;
-  if (user == null)
-    user = await googleSignIn.signInSilently();
+  if (user == null) user = await googleSignIn.signInSilently();
   if (user == null) {
     user = await googleSignIn.signIn();
     analytics.logLogin();
   }
   if (await auth.currentUser() == null) {
     GoogleSignInAuthentication credentials =
-    await googleSignIn.currentUser.authentication;
+        await googleSignIn.currentUser.authentication;
     await auth.signInWithGoogle(
       idToken: credentials.idToken,
       accessToken: credentials.accessToken,
@@ -80,13 +79,16 @@ class ChatMessage extends StatelessWidget {
           children: <Widget>[
             new Container(
               margin: const EdgeInsets.only(right: 16.0),
-              child: new CircleAvatar(backgroundImage: new NetworkImage(googleSignIn.currentUser.photoUrl)),
+              child: new CircleAvatar(
+                  backgroundImage:
+                      new NetworkImage(googleSignIn.currentUser.photoUrl)),
             ),
             new Expanded(
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(googleSignIn.currentUser.displayName, style: Theme.of(context).textTheme.subhead),
+                  new Text(googleSignIn.currentUser.displayName,
+                      style: Theme.of(context).textTheme.subhead),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
                     child: new Text(text),
@@ -116,7 +118,8 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text("Friendlychat"),
-          elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+          elevation:
+              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
         ),
         body: new Column(children: <Widget>[
           new Flexible(
@@ -128,8 +131,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
           )),
           new Divider(height: 1.0),
           new Container(
-            decoration:
-                new BoxDecoration(color: Theme.of(context).cardColor),
+            decoration: new BoxDecoration(color: Theme.of(context).cardColor),
             child: _buildTextComposer(),
           ),
         ]));
@@ -187,7 +189,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     _sendMessage(text: text);
   }
 
-  void _sendMessage({ String text }) {
+  void _sendMessage({String text}) {
     ChatMessage message = new ChatMessage(
       text: text,
       animationController: new AnimationController(

@@ -33,7 +33,7 @@ final analytics = new FirebaseAnalytics();
 final auth = FirebaseAuth.instance;
 final reference = FirebaseDatabase.instance.reference().child('messages');
 
-const String _name = "Your Name";
+// const String _name = "Your Name";
 
 void main() {
   runApp(new FriendlychatApp());
@@ -41,15 +41,14 @@ void main() {
 
 Future<Null> _ensureLoggedIn() async {
   GoogleSignInAccount user = googleSignIn.currentUser;
-  if (user == null)
-    user = await googleSignIn.signInSilently();
+  if (user == null) user = await googleSignIn.signInSilently();
   if (user == null) {
     user = await googleSignIn.signIn();
     analytics.logLogin();
   }
   if (await auth.currentUser() == null) {
     GoogleSignInAuthentication credentials =
-    await googleSignIn.currentUser.authentication;
+        await googleSignIn.currentUser.authentication;
     await auth.signInWithGoogle(
       idToken: credentials.idToken,
       accessToken: credentials.accessToken,
@@ -78,8 +77,7 @@ class ChatMessage extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return new SizeTransition(
-      sizeFactor: new CurvedAnimation(
-          parent: animation, curve: Curves.easeOut),
+      sizeFactor: new CurvedAnimation(parent: animation, curve: Curves.easeOut),
       axisAlignment: 0.0,
       child: new Container(
         margin: const EdgeInsets.symmetric(vertical: 10.0),
@@ -88,23 +86,24 @@ class ChatMessage extends StatelessWidget {
           children: <Widget>[
             new Container(
               margin: const EdgeInsets.only(right: 16.0),
-              child: new CircleAvatar(backgroundImage: new NetworkImage(snapshot.value['senderPhotoUrl'])),
+              child: new CircleAvatar(
+                  backgroundImage:
+                      new NetworkImage(snapshot.value['senderPhotoUrl'])),
             ),
             new Expanded(
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(
-                      snapshot.value['senderName'],
+                  new Text(snapshot.value['senderName'],
                       style: Theme.of(context).textTheme.subhead),
                   new Container(
                     margin: const EdgeInsets.only(top: 5.0),
-                    child: snapshot.value['imageUrl'] != null ?
-                    new Image.network(
-                      snapshot.value['imageUrl'],
-                      width: 250.0,
-                    ) :
-                    new Text(snapshot.value['text']),
+                    child: snapshot.value['imageUrl'] != null
+                        ? new Image.network(
+                            snapshot.value['imageUrl'],
+                            width: 250.0,
+                          )
+                        : new Text(snapshot.value['text']),
                   ),
                 ],
               ),
@@ -130,7 +129,8 @@ class ChatScreenState extends State<ChatScreen> {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text("Friendlychat"),
-          elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
+          elevation:
+              Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0,
         ),
         body: new Column(children: <Widget>[
           new Flexible(
@@ -139,18 +139,16 @@ class ChatScreenState extends State<ChatScreen> {
               sort: (a, b) => b.key.compareTo(a.key),
               padding: new EdgeInsets.all(8.0),
               reverse: true,
-              itemBuilder: (_, DataSnapshot snapshot, Animation<double> animation) {
-                  return new ChatMessage(
-                    snapshot: snapshot,
-                    animation: animation
-                  );
-                },
-              ),
+              itemBuilder:
+                  (_, DataSnapshot snapshot, Animation<double> animation) {
+                return new ChatMessage(
+                    snapshot: snapshot, animation: animation);
+              },
+            ),
           ),
           new Divider(height: 1.0),
           new Container(
-            decoration:
-                new BoxDecoration(color: Theme.of(context).cardColor),
+            decoration: new BoxDecoration(color: Theme.of(context).cardColor),
             child: _buildTextComposer(),
           ),
         ]));
@@ -170,13 +168,13 @@ class ChatScreenState extends State<ChatScreen> {
                     await _ensureLoggedIn();
                     File imageFile = await ImagePicker.pickImage();
                     int random = new Random().nextInt(100000);
-                    StorageReference ref =
-                        FirebaseStorage.instance.ref().child("image_$random.jpg");
+                    StorageReference ref = FirebaseStorage.instance
+                        .ref()
+                        .child("image_$random.jpg");
                     StorageUploadTask uploadTask = ref.put(imageFile);
                     Uri downloadUrl = (await uploadTask.future).downloadUrl;
                     _sendMessage(imageUrl: downloadUrl.toString());
-                  }
-              ),
+                  }),
             ),
             new Flexible(
               child: new TextField(
@@ -224,7 +222,7 @@ class ChatScreenState extends State<ChatScreen> {
     _sendMessage(text: text);
   }
 
-  void _sendMessage({ String text, String imageUrl }) {
+  void _sendMessage({String text, String imageUrl}) {
     reference.push().set({
       'text': text,
       'imageUrl': imageUrl,
@@ -233,5 +231,4 @@ class ChatScreenState extends State<ChatScreen> {
     });
     analytics.logEvent(name: 'send_message');
   }
-
 }
