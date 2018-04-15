@@ -69,7 +69,7 @@
              <!-- reverse url of your client id, for example: -->
     <string>com.googleusercontent.apps.132067896675-j9v9u2kf5ae9g72se6g1ljrpad4rfn08</string>
              <!-- bundle id, for example: -->
-                <string>com.yourcompany.friendlychat</string>
+                <string>com.molly_corp.friendlychat</string>
              </array>
           </dict>
       </array>

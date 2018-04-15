@@ -373,7 +373,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.friendlychat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.molly_corp.friendlychat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -395,7 +395,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany.friendlychat;
+				PRODUCT_BUNDLE_IDENTIFIER = com.molly_corp.friendlychat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

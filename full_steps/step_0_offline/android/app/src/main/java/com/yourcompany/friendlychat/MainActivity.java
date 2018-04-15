@@ -1,4 +1,4 @@
-package com.yourcompany.friendlychat;
+package com.molly_corp.friendlychat;
 
 import android.os.Bundle;
 
